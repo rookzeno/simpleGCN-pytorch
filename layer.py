@@ -30,6 +30,7 @@ class GraphConvolution(Module):
         for i in range(len(input)):
             support = torch.mm(input[i].view(input.shape[1],-1),self.weight)
             output = torch.spmm(adj[i],support) + torch.spmm(e,torch.mm(input[i].view(input.shape[1],-1),self.weight2))
+            out.append(output)
         out = torch.stack(out,dim=0)
         if self.bias is not None:
             return out + self.bias

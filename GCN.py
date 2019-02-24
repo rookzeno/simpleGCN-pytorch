@@ -12,7 +12,7 @@ class GCN(nn.Module):
         self.gc2 = GraphConvolution(nhid,nhid)
         self.dropout = dropout
         self.rd = Readout(nnode)
-        self.fc1 = nn.Liner(nnode,1)
+        self.fc1 = nn.Linear(nnode,1)
         nn.init.kaiming_normal_(self.fc1.weight)
     
     def forward(self,x,adj):
