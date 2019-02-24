@@ -26,10 +26,9 @@ class GraphConvolution(Module):
     
     def forward(self,input,adj):
         out = []
-        e = torch.eye(input.shape[1],input.shape[1])
         for i in range(len(input)):
             support = torch.mm(input[i].view(input.shape[1],-1),self.weight)
-            output = torch.spmm(adj[i],support) + torch.spmm(e,torch.mm(input[i].view(input.shape[1],-1),self.weight2))
+            output = torch.spmm(adj[i],support) + torch.mm(input[i].view(input.shape[1],-1),self.weight2)
             out.append(output)
         out = torch.stack(out,dim=0)
         if self.bias is not None:
