@@ -50,5 +50,5 @@ class Readout(Module):
         self.weight.data.uniform_(-stdv,stdv)
     
     def forward(self,input):
-        input = torch.sum(input,2)
+        input = torch.sum(input,1)
         return torch.mm(input,self.weight)
